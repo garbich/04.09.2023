@@ -1,0 +1,216 @@
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+	int value;
+	Node* next1;
+	Node* next2;
+
+	Node() {
+		value = 0;
+		next1 = nullptr;
+		next2 = nullptr;
+	}
+	Node(int value) {
+		value = this->value;
+	}
+};
+
+
+int main() {
+
+	// Task 1
+
+	Node* node1 = new Node();
+
+	node1->next1 = new Node();
+	node1->next1->value = 2;
+
+	node1->next2 = new Node();
+	node1->next2->value = 3;
+
+	node1->next2->next1 = node1->next1;
+
+	node1->next1->next1 = new Node();
+	node1->next1->next1->value = 4;
+
+	node1->next1->next1 = node1->next2->next2;
+
+
+	node1->next1->next2 = node1;
+ 
+	node1->next1->next1->next1 = node1;
+	node1->next1->next1->next2 = node1->next1;
+
+	
+	// Task 2
+
+	Node* node2 = new Node();
+
+	node2->next1 = new Node();
+	node2->next1->value = 2;
+
+	node2->next1->next1 = node2;
+	node2->next1->next2 = new Node();
+	node2->next1->next2->value = 3;
+
+	node2->next2 = new Node();
+	node2->next1->value = 4;
+
+	node2->next1->next2->next1 = node2->next1;
+	node2->next1->next2->next2 = node2->next2;
+
+	node2->next2->next1 = node2->next1;
+	node2->next2->next1 = nullptr;
+}
+*/
+
+
+
+
+// Task 3
+
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+	int value;
+	Node* next;
+	
+
+	Node() {
+		value = 0;
+		next = nullptr;
+		
+	}
+	Node(int value) {
+		this->value = value;
+		next = nullptr;
+	}
+};
+
+void putNodeToTail(Node*& head, int value) {
+	Node* n = new Node(value);
+
+	if (head == nullptr) {
+		head = n;
+		return;
+	}
+
+	Node* temp = head;
+
+	while (temp->next != nullptr) {
+		temp = temp->next;
+
+	}
+	temp->next = n;
+}
+
+void display(Node* head) {
+	Node* temp = head;
+	 
+	while (temp != nullptr) {
+		cout << temp->value << " " << " ";
+		temp = temp->next;
+
+	}
+	cout << endl;
+}
+
+void numLessThanZero(Node*& head) {
+	Node* temp = head;
+
+	cout << "Num less than zero: ";
+
+	while (temp != nullptr) {
+		if (temp->value < 0) {
+			cout << temp->value << " ";
+
+		}
+		temp = temp->next;
+	}
+	cout << endl;
+}
+
+void increaseByeOne(Node*& head) {
+	Node* temp = head;
+
+	int a;
+	cout << "enter num by which you want to increase: ";
+	cin >> a;
+
+	cout << "each num incease by: " << a << ":" << endl;
+
+	while (temp != nullptr) {
+		cout << temp->value + a << " " << " ";
+		temp = temp->next;
+	}
+	cout << endl;
+}
+
+void numWantToDelete(Node*& head) {
+	int a;
+	cout << "input num you want to delete: ";
+	cin >> a;
+
+	
+		while(head->value == a) {
+			
+			head = head->next;
+		}
+	
+	
+
+	Node* temp = head; 
+
+	while (temp->next != nullptr)
+	{
+		if (temp->next->value == a && temp->next->next == nullptr){
+			temp->next = nullptr;
+			break;
+		}
+		if (temp->next->value == a){
+			temp->next = temp->next->next; 
+		}
+		temp = temp->next;
+	}
+}
+
+
+int main() {
+
+	Node* head = nullptr;
+
+
+	putNodeToTail(head, 1);
+	putNodeToTail(head, 3);
+	putNodeToTail(head, -2);
+	putNodeToTail(head, 4);
+	putNodeToTail(head, -5);
+	putNodeToTail(head, 7);
+	putNodeToTail(head, 6);
+	putNodeToTail(head, -8);
+	putNodeToTail(head, 3);
+
+	display(head);
+	numLessThanZero(head);
+
+	int a;
+	cout << "input 1 for increase nums or input 2 for delete num: ";
+		cin >> a;
+		if (a == 1) {
+			display(head);
+			increaseByeOne(head);
+			return 0;
+		}
+		if (a == 2) {
+			display(head);
+			numWantToDelete(head);
+			display(head);
+			return 0;
+		}
+	
+}
